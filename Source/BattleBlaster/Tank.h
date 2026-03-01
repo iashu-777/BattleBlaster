@@ -9,6 +9,10 @@
 //#include "Camera/CameraComponent.h" //i have done forward declaration , as it is fast. Header is attached in cpp file rather than here 
 #include "EnhancedInputSubsystems.h"
 
+#include "InputAction.h"
+#include "InputActionValue.h"
+#include "EnhancedInputComponent.h"
+
 #include "Tank.generated.h"
 
 class UCameraComponent; //forward declaration of camera component
@@ -37,10 +41,15 @@ public:
 	UPROPERTY(EditAnywhere,Category="Input")
 	class UInputMappingContext* DefaultMappingContext; //forward declaration in fly
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* MoveAction;
+
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmComp;
 
 	UPROPERTY(VisibleAnywhere)
 	 UCameraComponent* CameraComp;
+
+	 void MoveInput();
 
 };
