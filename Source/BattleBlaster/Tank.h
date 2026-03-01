@@ -6,12 +6,12 @@
 #include "BasePawn.h"
 
 #include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
-#include "InputMappingContext.h"
+//#include "Camera/CameraComponent.h" //i have done forward declaration , as it is fast. Header is attached in cpp file rather than here 
 #include "EnhancedInputSubsystems.h"
 
 #include "Tank.generated.h"
 
+class UCameraComponent; //forward declaration of camera component
 /**
  * 
  */
@@ -35,12 +35,12 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 	UPROPERTY(EditAnywhere,Category="Input")
-	UInputMappingContext* DefaultMappingContext;
+	class UInputMappingContext* DefaultMappingContext; //forward declaration in fly
 
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmComp;
 
 	UPROPERTY(VisibleAnywhere)
-	UCameraComponent* CameraComp;
+	 UCameraComponent* CameraComp;
 
 };
