@@ -5,7 +5,6 @@
 #include "Camera/CameraComponent.h"
 #include "InputMappingContext.h"
 
-
 ATank::ATank()
 {
 	SpringArmComp=CreateDefaultSubobject<USpringArmComponent>(TEXT("SprinArmComp"));
@@ -57,5 +56,11 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::MoveInput(const FInputActionValue& Value)
 {
 	float InputValue = Value.Get<float>();
-	UE_LOG(LogTemp, Display, TEXT("Input Value = %f"),InputValue);
+
+	FVector DeltaLocation = FVector(0.0f,0.0f,0.0f);
+	DeltaLocation.X = (Speed * InputValue) * GetWorld()->GetDeltaSeconds();
+
+	 
+	AddActorLocalOffset(DeltaLocation, true);//it adds location offest of an actor
+	//UE_LOG(LogTemp, Display, TEXT("Input Value = %f"),InputValue);
 }
