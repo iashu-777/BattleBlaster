@@ -50,6 +50,8 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	if (UEnhancedInputComponent* EIC = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EIC->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::MoveInput);
+		EIC->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ATank::TurnInput);
+
 	}
 }
 
@@ -63,4 +65,15 @@ void ATank::MoveInput(const FInputActionValue& Value)
 	 
 	AddActorLocalOffset(DeltaLocation, true);//it adds location offest of an actor
 	//UE_LOG(LogTemp, Display, TEXT("Input Value = %f"),InputValue);
+}
+
+void ATank::TurnInput(const FInputActionValue& Value)
+{
+	float InputValue = Value.Get<float>();
+
+	FRotator DeltaRotation = FRotator(0.0f,0.0f,0.0f);
+	DeltaRotation.Yaw = (TurnRate * InputValue) * GetWorld()->GetDeltaSeconds(); //yaw to turn around Z
+
+	AddActorLocalRotation(DeltaRotation, true); // it makes actor rotate using a local space rotation
+
 }
