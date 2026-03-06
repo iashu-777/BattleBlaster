@@ -11,4 +11,17 @@ void ATower::BeginPlay()
 void ATower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// we want all the towers rotating towards the enemy continously all the time 
+
+	if (Tank)
+	{
+		float DistanceToTank = FVector::Dist(Tank->GetActorLocation(),GetActorLocation());
+		if (DistanceToTank <= FireRange)
+		{
+		RotateTurret(Tank->GetActorLocation());
+		}
+
+	}
+
 }
