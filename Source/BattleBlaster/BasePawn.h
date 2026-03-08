@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+
 #include "Components/CapsuleComponent.h"
+#include "Projectile.h"
 #include "BasePawn.generated.h"
 
 UCLASS()
@@ -32,4 +34,8 @@ public:
 	void RotateTurret(FVector LookAtTarget);
 
 	void Fire();
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AProjectile>ProjectileClass; //we created this as we dont have the access to blueprint, so we just make a member variable of this class with edit anywhere property so we can edit it from the unreal
+
 };

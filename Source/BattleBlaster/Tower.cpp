@@ -11,7 +11,7 @@ void ATower::BeginPlay()
 	GetWorldTimerManager().SetTimer(FireTimerHandle,this,&ATower::CheckFireCondition,FireRate,true);
 }
 
-bool ATower::IsFireRange()
+bool ATower::IsInFireRange()
 {
 	if (Tank)
 	{
