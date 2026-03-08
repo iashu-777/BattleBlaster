@@ -6,6 +6,22 @@
 void ATower::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FTimerHandle FireTimerHandle;
+	GetWorldTimerManager().SetTimer(FireTimerHandle,this,&ATower::CheckFireCondition,FireRate,true);
+}
+
+bool ATower::IsFireRange()
+{
+	if (Tank)
+	{
+		float DistanceToTank = FVector::Dist(Tank->GetActorLocation(), GetActorLocation());
+		if (DistanceToTank <= FireRange)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void ATower::Tick(float DeltaTime)
@@ -14,14 +30,20 @@ void ATower::Tick(float DeltaTime)
 
 	// we want all the towers rotating towards the enemy continously all the time 
 
-	if (Tank)
+	if (IsInFireRange())
 	{
-		float DistanceToTank = FVector::Dist(Tank->GetActorLocation(),GetActorLocation());
-		if (DistanceToTank <= FireRange)
-		{
 		RotateTurret(Tank->GetActorLocation());
-		}
-
 	}
 
 }
+
+void ATower::CheckFireCondition()
+{
+	UE_LOG(LogTemp, Display, TEXT("Timeout!"));
+
+	if (IsInFireRange())
+	{
+		Fire();
+	}
+}
+
