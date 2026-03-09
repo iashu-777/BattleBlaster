@@ -19,6 +19,7 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+	ProjectileMesh->OnComponentHit.AddDynamic(this,&AProjectile::OnHit);
 	
 }
 
@@ -27,5 +28,13 @@ void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor) {
+
+	UE_LOG(LogTemp, Display, TEXT("the name of the actor got hit is %s"), *OtherActor->GetActorNameOrLabel());
+	}
 }
 

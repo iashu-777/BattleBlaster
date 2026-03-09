@@ -42,7 +42,14 @@ void ABasePawn::Fire()
 
 	//DrawDebugSphere(GetWorld(), SpawnLocation, 25.0f, 12, FColor::Red, false, 3.0f);
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileClass,SpawnLocation,SpawnRotation); 
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
+
+	if (Projectile)
+	{
+		Projectile->SetOwner(this); //if enemy is shooting the 'this' represents 'tower' and if player is shooting then 'this' represents 'tank'.
+
+
+	}
 	// above function just create a new actor of projectile with ProjectileClass blueprint  
 	//aur jitna bhata bhat fire hoga utni baar projectile spawn hoga
 
