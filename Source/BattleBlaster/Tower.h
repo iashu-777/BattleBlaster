@@ -38,4 +38,6 @@ public:
 	float FireRate = 2.0f;
 
 	bool IsInFireRange();
+
+	void HandleDestruction();
 };

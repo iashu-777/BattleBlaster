@@ -90,3 +90,10 @@ void ATank::TurnInput(const FInputActionValue& Value)
 	AddActorLocalRotation(DeltaRotation, true); // it makes actor rotate using a local space rotation
 
 }
+
+
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	UE_LOG(LogTemp, Display, TEXT("Tank Handle destruction"));
+}

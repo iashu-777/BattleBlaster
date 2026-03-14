@@ -41,3 +41,23 @@ void ABattleBlasterGameMode::BeginPlay()
 	}
 	UE_LOG(LogTemp, Display, TEXT("loop ends here!"));
 }
+
+void ABattleBlasterGameMode::ActorDied(AActor* DeadActor)
+{
+	if (DeadActor == Tank)
+	{
+		Tank->HandleDestruction();
+	}
+	else {
+		//tower just died
+		ATower* DeadTower= Cast<ATower>(DeadActor);
+		if (DeadTower)
+		{
+			DeadTower->HandleDestruction();
+			TowerCount--;
+			if (TowerCount <= 0) {
+				UE_LOG(LogTemp, Display, TEXT("All Towers are daed jeet gaye huehuehue!"));
+			}
+		}
+	}
+}

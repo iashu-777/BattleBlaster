@@ -47,3 +47,13 @@ void ATower::CheckFireCondition()
 	}
 }
 
+
+void ATower::HandleDestruction()
+{
+	Super::HandleDestruction();
+
+	Destroy();
+	UE_LOG(LogTemp, Display, TEXT("Tower Handle destruction"));
+}
+
+
