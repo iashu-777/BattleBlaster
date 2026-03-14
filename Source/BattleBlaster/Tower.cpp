@@ -41,7 +41,7 @@ void ATower::CheckFireCondition()
 {
 	UE_LOG(LogTemp, Display, TEXT("Timeout!"));
 
-	if (IsInFireRange())
+	if (Tank && Tank->IsAlive &&IsInFireRange())
 	{
 		Fire();
 	}
